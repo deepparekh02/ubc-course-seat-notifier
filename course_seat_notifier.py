@@ -8,17 +8,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 # Function to send email
-def send_email(email, password, seat_type, subject, course, section):
+def send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url):
     msg = EmailMessage()
-    msg.set_content("A " + seat_type + " seat is available in {subject} {course} {section}! Go register now!".format(subject=subject, course=course, section=section))
+    msg.set_content("A " + seat_type + " seat is available in {subject} {course} {section}! Go register now on {url}".format(subject=subject, course=course, section=section, url=url))
 
     msg['Subject'] = 'Seat Availability Notification for ' + subject + ' ' + course + ' ' + section
-    msg['From'] = email
-    msg['To'] = email
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
 
     # Replace 'smtp.example.com' with your email provider's SMTP server
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(email, password)
+        smtp.login(sender_email, password)
         smtp.send_message(msg)
 
 # User input
@@ -27,8 +27,14 @@ course = input("Enter the course number (E.g. 203): ")
 section = input("Enter the section number (E.g. 205): ")
 url = "https://www.courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-section&dept={subject}&course={course}&section={section}".format(subject=subject, course=course, section=section)
 seat_type = input("Enter seat type (general/restricted): ")
-email_id = input("Enter your email ID (Gmail only): ")
-password = input("Enter your app password (more info in README): ")
+sender_email = input("Enter the sender's email ID (Gmail only): ")
+password = input("Enter the sender's app password (more info in README): ")
+same_email = input("Do you want to send the email to a different email ID (Y/N)? ")
+recipient_email = ''
+if same_email.lower() == 'y':
+    recipient_email = input("Enter the recipient's email ID: ")
+else:
+    recipient_email = sender_email
 time_check = int(input("How frequently do you want to check for seat availability (in minutes) (min = 2)?"))
 time_check = min(time_check, 2)
 
@@ -53,7 +59,7 @@ while True:
     # Check if seats are available and send email
     if seats_available > 0:
         print("FOUND!")
-        send_email(email_id, password, seat_type, subject, course, section)
+        send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url)
         
     time.sleep(time_check * 60)
 
