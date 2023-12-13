@@ -1,7 +1,7 @@
 # Course Seat Availability Notifier
 
 ## Introduction
-This Python script automates the process of checking for seat availability in university courses. It periodically monitors a specified course's seat availability on the university's course schedule page and sends an email notification when a seat becomes available.
+This Python script automates the process of checking for seat availability in UBC courses. It periodically monitors a specified course's seat availability on the university's course schedule page and sends an email notification when a seat becomes available.
 
 ## Installation Instructions
 1. **Install Python**: 
