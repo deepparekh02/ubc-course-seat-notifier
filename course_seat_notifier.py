@@ -29,7 +29,8 @@ url = "https://www.courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tnam
 seat_type = input("Enter seat type (general/restricted): ")
 email_id = input("Enter your email ID (Gmail only): ")
 password = input("Enter your app password (more info in README): ")
-time_check = int(input("How frequently do you want to check for seat availability (in minutes)?"))
+time_check = int(input("How frequently do you want to check for seat availability (in minutes) (min = 2)?"))
+time_check = min(time_check, 2)
 
 chrome_options = Options()
 driver = webdriver.Chrome(options=chrome_options)
