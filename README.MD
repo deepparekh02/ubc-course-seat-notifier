@@ -32,6 +32,13 @@ This Python script automates the process of checking for seat availability in un
    - Run the script using `python course_seat_notifier.py`.
 
 2. **Input Parameters**: Upon running the script, input the details as prompted.
+   - **Subject Area**: E.g., COMM
+   - **Course Number**: E.g., 203
+   - **Section Number**: E.g., 205
+   - **Seat Type**: Choose between 'general' or 'restricted'.
+   - **Email ID**: Your Gmail ID.
+   - **App Password**: The app password generated for your Gmail account.
+   - **Check Frequency**: Frequency of seat availability checks (in minutes).
    - NOTE (IMPORTANT): If a seat is available for a long time, the code will keep spamming your account every time interval you have chosen.
 
 ## Running the Script Continuously
