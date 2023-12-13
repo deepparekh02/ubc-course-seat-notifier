@@ -17,12 +17,11 @@ def send_email(email, password, seat_type, subject, course, section):
     msg['To'] = email
 
     # Replace 'smtp.example.com' with your email provider's SMTP server
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:  # Example for Gmail
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(email, password)
         smtp.send_message(msg)
 
-# User input for URL and email
-
+# User input
 subject = input("Enter the subject area (E.g. COMM): ")
 course = input("Enter the course number (E.g. 203): ")
 section = input("Enter the section number (E.g. 205): ")
@@ -30,14 +29,9 @@ url = "https://www.courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tnam
 seat_type = input("Enter seat type (general/restricted): ")
 email_id = input("Enter your email ID (Gmail only): ")
 password = input("Enter your app password (more info in README): ")
-my_pwd = "ghuy uzfa jgdy zakz"
 time_check = int(input("How frequently do you want to check for seat availability (in minutes)?"))
 
-# Set Chrome options for headless mode
 chrome_options = Options()
-# chrome_options.add_argument("--headless")
-
-# Initialize the Chrome driver in headless mode
 driver = webdriver.Chrome(options=chrome_options)
 
 # Main loop
