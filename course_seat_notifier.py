@@ -8,9 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 # Function to send email
-def send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url):
+def send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url, seats_available):
     msg = EmailMessage()
-    msg.set_content("A " + seat_type + " seat is available in {subject} {course} {section}! Go register now on {url}".format(subject=subject, course=course, section=section, url=url))
+    msg.set_content(seats_available + " " + seat_type + " seat(s) are available in {subject} {course} {section}! Go register now on {url}".format(subject=subject, course=course, section=section, url=url))
 
     msg['Subject'] = 'Seat Availability Notification for ' + subject + ' ' + course + ' ' + section
     msg['From'] = sender_email
@@ -35,8 +35,8 @@ if same_email.lower() == 'y':
     recipient_email = input("Enter the recipient's email ID: ")
 else:
     recipient_email = sender_email
-time_check = int(input("How frequently do you want to check for seat availability (in minutes) (min = 2)?"))
-time_check = min(time_check, 2)
+time_input = int(input("How frequently do you want to check for seat availability (in minutes) (min = 2)?"))
+time_check = max(time_input, 2)
 
 chrome_options = Options()
 driver = webdriver.Chrome(options=chrome_options)
@@ -47,6 +47,7 @@ if seat_type.lower() == 'restricted':
 else:
     element_path = '/html/body/div[2]/div[4]/table[4]/tbody/tr[3]/td[2]/strong'
 
+email_sent = False
 # Main loop
 while True:
     driver.get(url)
@@ -59,7 +60,14 @@ while True:
     # Check if seats are available and send email
     if seats_available > 0:
         print("FOUND!")
-        send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url)
+        if (not email_sent):
+            send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url, seats_available)
+        time_check = 60
+        email_sent = True
+    else:
+        time_check = max(time_input, 2)
+        email_sent = False
+        
         
     time.sleep(time_check * 60)
 
