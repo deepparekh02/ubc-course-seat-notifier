@@ -35,21 +35,20 @@ time_check = min(time_check, 2)
 chrome_options = Options()
 driver = webdriver.Chrome(options=chrome_options)
 
+element_path = ''
+if seat_type.lower() == 'restricted':
+    element_path = '/html/body/div[2]/div[4]/table[4]/tbody/tr[4]/td[2]/strong'
+else:
+    element_path = '/html/body/div[2]/div[4]/table[4]/tbody/tr[3]/td[2]/strong'
+
 # Main loop
 while True:
     driver.get(url)
-    if seat_type.lower() == 'general':
-        wait = WebDriverWait(driver, 20)
-        element_locator = (By.XPATH, '/html/body/div[2]/div[4]/table[4]/tbody/tr[3]/td[2]/strong')
-        table = wait.until(EC.visibility_of_element_located(element_locator))
-        seat_element = driver.find_element(By.XPATH, '/html/body/div[2]/div[4]/table[4]/tbody/tr[3]/td[2]/strong')
-        seats_available = int(seat_element.text)
-    elif seat_type.lower() == 'restricted':
-        wait = WebDriverWait(driver, 20)
-        element_locator = (By.XPATH, '/html/body/div[2]/div[4]/table[4]/tbody/tr[4]/td[2]/strong')
-        table = wait.until(EC.visibility_of_element_located(element_locator))
-        seat_element = driver.find_element(By.XPATH, '/html/body/div[2]/div[4]/table[4]/tbody/tr[4]/td[2]/strong')
-        seats_available = int(seat_element.text)
+    wait = WebDriverWait(driver, 20)
+    element_locator = (By.XPATH, element_path)
+    table = wait.until(EC.visibility_of_element_located(element_locator))
+    seat_element = driver.find_element(By.XPATH, element_path)
+    seats_available = int(seat_element.text)
 
     # Check if seats are available and send email
     if seats_available > 0:
