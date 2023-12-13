@@ -32,8 +32,7 @@ This Python script automates the process of checking for seat availability in un
    - Run the script using `python course_seat_bot.py`.
 
 2. **Input Parameters**: Upon running the script, input the details as prompted.
-   - Note: If a seat is available for a long time, the code will keep spamming your account every time interval
-           you have chosen.
+   - NOTE (IMPORTANT): If a seat is available for a long time, the code will keep spamming your account every time interval you have chosen.
 
 ## Running the Script Continuously
 - **Keep Terminal Open**: For the script to run continuously and monitor seat availability, the terminal or command prompt where the script is running must be kept open.
