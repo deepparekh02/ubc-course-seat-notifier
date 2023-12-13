@@ -29,9 +29,9 @@ url = "https://www.courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tnam
 seat_type = input("Enter seat type (general/restricted): ")
 sender_email = input("Enter the sender's email ID (Gmail only): ")
 password = input("Enter the sender's app password (more info in README): ")
-same_email = input("Do you want to send the email to a different email ID (Y/N)? ")
+different_email = input("Do you want to send the email to a different email ID (Y/N)? ")
 recipient_email = ''
-if same_email.lower() == 'y':
+if different_email.lower() == 'y':
     recipient_email = input("Enter the recipient's email ID: ")
 else:
     recipient_email = sender_email
@@ -62,7 +62,7 @@ while True:
         print("FOUND!")
         if (not email_sent):
             send_email(sender_email, recipient_email, password, seat_type, subject, course, section, url, seats_available)
-        time_check = 60
+        time_check = max(time_input, 60)
         email_sent = True
     else:
         time_check = max(time_input, 2)

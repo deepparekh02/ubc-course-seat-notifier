@@ -40,7 +40,7 @@ This Python script automates the process of checking for seat availability in UB
    - **App Password**: The app password generated for your Gmail account.
    - **Recipient Email ID**: The email you want to send the notification to.
    - **Check Frequency**: Frequency of seat availability checks (in minutes).
-   - NOTE (IMPORTANT): If a seat is available for a long time, the code will keep spamming your account every time interval you have chosen.
+   - NOTE (IMPORTANT): If a seat is available for a long time, the code will send an email every 60 minutes (or the time interval chosen if it's more) until you kill the script or the seat becomes unavailable. In the latter case, it will start checking more frequently again.
 
 ## Running the Script Continuously
 - **Keep Terminal Open**: For the script to run continuously and monitor seat availability, the terminal or command prompt where the script is running must be kept open.
