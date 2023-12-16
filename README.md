@@ -14,6 +14,9 @@ This Python script automates the process of checking for seat availability in UB
 ## Query Saving and Reloading
 This application includes a convenient feature to save your search queries. When you input your course details and other parameters, the app saves these queries locally. The next time you open the app, it automatically reloads your last queries. This saves time and effort, especially for users who need to monitor the same courses regularly.
 
+## Multiprocessing and Concurrent Query Handling
+The application is designed with multiprocessing capabilities, allowing it to handle multiple queries simultaneously. This means you can monitor several courses at once without affecting the performance or speed of each individual query.
+
 ### How It Works
 - **Saving Queries**: Each time you run a query, the app saves the parameters in a local file.
 - **Reloading Queries**: Upon restarting the app, it checks for saved queries and pre-loads them for your convenience.
