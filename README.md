@@ -58,7 +58,6 @@ The application is designed with multiprocessing capabilities, allowing it to ha
    - **App Password**: The app password generated for your Gmail account.
    - **Recipient Email ID**: The email you want to send the notification to.
    - **Check Frequency**: Frequency of seat availability checks (in minutes).
-   - NOTE (IMPORTANT): If a seat is available for a long time, the code will send an email every 60 minutes (or the time interval chosen if it's more) until you kill the script or the seat becomes unavailable. In the latter case, it will start checking more frequently again.
 
 ## Running the Script Continuously
 - **Keep App Open**: For the App to run continuously and monitor seat availability, it must be kept open
